@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SudokuSolver"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="SudokuSolver" Height="450" Width="800">
+    <Frame x:Name="MainFrame" Width="800" Height="450" NavigationUIVisibility="Hidden">
         
-    </Grid>
+    </Frame>
 </Window>
