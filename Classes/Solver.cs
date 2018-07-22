@@ -31,6 +31,13 @@
             return false;
         }
 
+        public static bool CheckNoConflict(int[] grid, int row, int column, int digit)
+        {
+            return !CheckConflictInRow(grid, row, digit) &&
+                   !CheckConflictInColumn(grid, column, digit) &&
+                   !CheckConflictInInset(grid, row - row % 3, column - column % 3, digit);
+        }
+
         private static bool FindEmptyPosition(int [] grid, ref int row, ref int column)
         {
             for (row = 0; row < dimension; row++)
@@ -88,14 +95,5 @@
                     
             return false;
         }
-
-        public static bool CheckNoConflict(int [] grid, int row, int column, int digit)
-        {
-            return !CheckConflictInRow(grid, row, digit) &&
-                   !CheckConflictInColumn(grid, column, digit) &&
-                   !CheckConflictInInset(grid, row - row % 3, column - column % 3, digit);
-        }
-
-
     }
 }

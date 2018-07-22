@@ -72,9 +72,13 @@
     </ApplicationDefinition>
     <Compile Include="Classes\GridDrafter.cs" />
     <Compile Include="Classes\GridMaker.cs" />
+    <Compile Include="Pages\ChooseDifficulty.xaml.cs">
+      <DependentUpon>ChooseDifficulty.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SolverPage.xaml.cs">
       <DependentUpon>SolverPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tests\GridMakerTests.cs" />
     <Compile Include="Tests\SolverTests.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -89,6 +93,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\ChooseDifficulty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

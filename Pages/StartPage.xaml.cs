@@ -5,9 +5,6 @@ using System.Windows.Navigation;
 
 namespace SudokuSolver.Pages
 {
-    /// <summary>
-    /// Interaction logic for StartPage.xaml
-    /// </summary>
     public partial class StartPage : Page
     {
         public StartPage()
@@ -17,13 +14,14 @@ namespace SudokuSolver.Pages
 
         private void StartGame_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService navService = NavigationService.GetNavigationService(this);
-            navService.Navigate(new System.Uri("/Pages/Game.xaml", UriKind.RelativeOrAbsolute));
+            ChooseDifficulty chooseDifficultyPage = new ChooseDifficulty();
+            NavigationService.Navigate(chooseDifficultyPage);
         }
 
         private void Solver_Click(object sender, RoutedEventArgs e)
         {
-
+            SolverPage solverPage = new SolverPage();
+            NavigationService.Navigate(solverPage);
         }
     }
 }

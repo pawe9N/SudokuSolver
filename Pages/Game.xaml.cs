@@ -1,77 +1,141 @@
 ﻿using SudokuSolver.Classes;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Navigation;
 
 namespace SudokuSolver.Pages
 {
     public partial class Game : Page
     {
+        private int level;
+        private int points;
         private int[] grid;
-        GridDrafter gd;
+        private int[] solved;
+        private int[] tempGrid;
+        GridDrafter gridDrafter;
 
-        public Game()
+        public Game(int level)
         {
             InitializeComponent();
+            this.level = level;
+            points = 0;
 
-            GridMaker.AddRandomDigitAtBeginning(ref grid, 30);
-            gd = new GridDrafter(grid);
+            NewSudoku();
+        }
 
-            gd.CreateGridForSudoku(myCanvas); 
-            gd.AddInputsForUser(myCanvas);
-        }   
+        private void NewSudoku()
+        {
+            myCanvas.Children.Clear();
+
+            GridMaker.AddRandomDigitsToGrid(ref grid, 81-level);
+            gridDrafter = new GridDrafter(grid);
+
+            gridDrafter.CreateGridForSudoku(myCanvas);
+
+            solved = new int[81];
+            Array.Copy(grid, solved, 81);
+
+            Solver.TrySolveSudoku(solved);
+
+            gridDrafter.AddInputsForUser(myCanvas, grid);
+
+            TextBox[] tbs = gridDrafter.GetInputs();
+            foreach (TextBox tb in tbs)
+            {
+                if (tb != null)
+                {
+                    tb.KeyDown += Inputs_KeyDown;
+                }
+            }
+
+            NextSudoku.IsEnabled = false;
+            CheckInputs.IsEnabled = true;
+            PointsText.Text = $"Points: {points}";
+        }
 
         private void SolveButton_Click(object sender, RoutedEventArgs e)
         {
             myCanvas.Children.Clear();
             Solver.TrySolveSudoku(grid);
 
-            gd = new GridDrafter(grid);
+            gridDrafter = new GridDrafter(grid);
 
-            gd.CreateGridForSudoku(myCanvas);
-            gd.AddInputsForUser(myCanvas);
+            gridDrafter.CreateGridForSudoku(myCanvas);
+            gridDrafter.AddInputsForUser(myCanvas, grid);
         }
 
         private void CheckInputs_Click(object sender, RoutedEventArgs e)
         {
-            int[] solved = new int[81];
-            Array.Copy(grid, solved, 81);
+            tempGrid = new int[81];
+            Array.Copy(grid, tempGrid, 81);
 
-            Solver.TrySolveSudoku(solved);
-
-            myCanvas.Children.Clear();
-
-            TextBox [] tbs = gd.getInputs();
+            TextBox [] tbs = gridDrafter.GetInputs();
 
             for(int i=0; i<81; i++)
             {
                 if(tbs[i] != null && tbs[i].Text.ToString().Length != 0)
                 {
-                    grid[i] = Int32.Parse(tbs[i].Text.ToString());
+                    tempGrid[i] = Int32.Parse(tbs[i].Text.ToString());
                 }
             }
-
-            gd.CreateGridForSudoku(myCanvas);
-            gd.AddInputsForUser(myCanvas);
-
-            TextBlock [] tbks = gd.getDigits();
 
             for(int i=0; i<81; i++)
             {
-                if(tbks[i] != null && tbs[i] != null)
+                if(tbs[i] != null)
                 {
-                    if (solved[i] != grid[i])
+                    if (solved[i] != tempGrid[i] && tempGrid[i] != 0)
                     {
-                        tbks[i].Foreground = new SolidColorBrush(Colors.Red);
+                        tbs[i].Foreground = new SolidColorBrush(Colors.Red);
+                        if (points > 0)
+                        {
+                            points--;
+                            PointsText.Text = $"Points: {points}";
+                        }
                     }
-                    else
+                    else if(tempGrid[i] != 0)
                     {
-                        tbks[i].Foreground = new SolidColorBrush(Colors.Green);
+                        tbs[i].Foreground = new SolidColorBrush(Colors.DarkGreen);
+                        tbs[i].IsEnabled = false;
                     }
                 }
             }
 
+            bool gridsAreEqual = Enumerable.SequenceEqual(tempGrid, solved);
+            if(gridsAreEqual)
+            {
+                points += 10*(level-1)+1;
+                if(level<80)
+                {
+                    level++;
+                }
+                PointsText.Text = $"Points: {points}";
+                NextSudoku.IsEnabled = true;
+                CheckInputs.IsEnabled = false;
+            }
+
+        }
+
+        private void NextSudoku_Click(object sender, RoutedEventArgs e)
+        {
+            NewSudoku();
+        }
+
+        private void Inputs_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                CheckInputs.Focus();
+            }
+        }
+
+        private void BackButtone_Click(object sender, RoutedEventArgs e)
+        {
+            StartPage startPage = new StartPage();
+            NavigationService.Navigate(startPage);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace SudokuSolver.Classes
                     line.Stroke = new SolidColorBrush(Colors.DarkGray);
                 }
                 line.StrokeThickness = 2;
-                line.X1 = line.X2 = 250 + 30 * i;
+                line.X1 = line.X2 = 270 + 30 * i;
                 line.Y1 = 50;
                 line.Y2 = 320;
                 canvas.Children.Add(line);
@@ -54,13 +54,13 @@ namespace SudokuSolver.Classes
                 }
                 line.StrokeThickness = 2;
                 line.Y1 = line.Y2 = 50 + 30 * i;
-                line.X1 = 250;
-                line.X2 = 520;
+                line.X1 = 270;
+                line.X2 = 540;
                 canvas.Children.Add(line);
             }
         }
 
-        public void AddInputsForUser(Canvas canvas)
+        public void AddInputsForUser(Canvas canvas, int [] grid)
         {
             for (int j = 0; j < 9; j++)
             {
@@ -71,7 +71,7 @@ namespace SudokuSolver.Classes
                     {
                         TextBlock digit = new TextBlock
                         {
-                            Margin = new Thickness(260 + 30 * i, top, 0, 0),
+                            Margin = new Thickness(280 + 30 * i, top, 0, 0),
                             Width = 24,
                             Height = 24,
                             FontSize = 18,
@@ -85,7 +85,7 @@ namespace SudokuSolver.Classes
                     {
                         TextBox input = new TextBox
                         {
-                            Margin = new Thickness(253 + 30 * i, top, 0, 0),
+                            Margin = new Thickness(273 + 30 * i, top, 0, 0),
                             Width = 24,
                             Height = 24,
                             FontSize = 18,
@@ -101,12 +101,12 @@ namespace SudokuSolver.Classes
             }
         }
 
-        public TextBox[] getInputs()
+        public TextBox[] GetInputs()
         {
             return inputs;
         }
 
-        public TextBlock[] getDigits()
+        public TextBlock[] GetDigits()
         {
             return digits;
         }
@@ -116,7 +116,8 @@ namespace SudokuSolver.Classes
             TextBox tb = (TextBox)sender;
             if (tb.Text.Length > 0)
             {
-                e.Handled = true;
+                tb.Text = "";
+                e.Handled = !IsTextAllowed(e.Text);
             }
             else
             {
@@ -127,7 +128,7 @@ namespace SudokuSolver.Classes
 
         private static bool IsTextAllowed(string text)
         {
-            Regex _regex = new Regex("[0-9]");
+            Regex _regex = new Regex("[1-9]");
 
             return _regex.IsMatch(text);
         }
