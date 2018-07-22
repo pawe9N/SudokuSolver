@@ -9,16 +9,16 @@ If you want to use this program, you have to download package from release tab a
 
 ## Litle demo with gifs
 - solving sudoku on very easy level
-<img src="https://i.imgur.com/C4tBokR.gif">
+<img src="https://i.imgur.com/C4tBokR.gif?1">
 
 - bad and good answers are colored in different colors (bad->red, good->green)
-<img src="https://i.imgur.com/i6KXnMN.gif">
+<img src="https://i.imgur.com/i6KXnMN.gif?1">
 
 - computer can solve sudoku for user, but this service does not add points
-<img src="https://i.imgur.com/dfNf0hY.gif">
+<img src="https://i.imgur.com/dfNf0hY.gif?2">
 
 - user can add his own sudoku templates to computer to solve them for him
-<img src="https://i.imgur.com/RRaIanQ.gif">
+<img src="https://i.imgur.com/RRaIanQ.gif?2">
 
 - what if user puts sudoku which can't be solved
-<img src="https://i.imgur.com/BCs4b9m.gif">
+<img src="https://i.imgur.com/BCs4b9m.gif?2">
