@@ -13,7 +13,7 @@ namespace SudokuSolver.Pages
 
         private void VeryEasyButton_Click(object sender, RoutedEventArgs e)
         {
-            Game gamePage = new Game(1);
+            Game gamePage = new Game(5);
             NavigationService.Navigate(gamePage);
         }
 

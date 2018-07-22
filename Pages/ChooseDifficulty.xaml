@@ -8,12 +8,12 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ChooseDifficulty">
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Label Content="Choose difficulty level:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <Button Name="VeryEasyButton" Content="Very Easy" Width="100" Height="30" Click="VeryEasyButton_Click"/>
-        <Button Name="EasyButton" Content="Easy" Width="100" Height="30" Click="EasyButton_Click"/>
-        <Button Name="NormalButton" Content="Normal" Width="100" Height="30" Click="NormalButton_Click"/>
-        <Button Name="HardButton" Content="Hard" Width="100" Height="30" Click="HardButton_Click"/>
-        <Button Name="VeryHardButton" Content="Very Hard" Width="100" Height="30" Click="VeryHardButton_Click"/>
+    <StackPanel>
+        <Label Content="Choose difficulty level:"/>
+        <Button Name="VeryEasyButton" Content="Very Easy" Click="VeryEasyButton_Click"/>
+        <Button Name="EasyButton" Content="Easy" Click="EasyButton_Click"/>
+        <Button Name="NormalButton" Content="Normal" Click="NormalButton_Click"/>
+        <Button Name="HardButton" Content="Hard"  Click="HardButton_Click"/>
+        <Button Name="VeryHardButton" Content="Very Hard"  Click="VeryHardButton_Click"/>
     </StackPanel>
 </Page>

@@ -54,7 +54,8 @@ namespace SudokuSolver.Pages
 
             NextSudoku.IsEnabled = false;
             CheckInputs.IsEnabled = true;
-            PointsText.Text = $"Points: {points}";
+            SolveButton.IsEnabled = true;
+            PointsText.Content = $"Points: {points}";
         }
 
         private void SolveButton_Click(object sender, RoutedEventArgs e)
@@ -66,6 +67,10 @@ namespace SudokuSolver.Pages
 
             gridDrafter.CreateGridForSudoku(myCanvas);
             gridDrafter.AddInputsForUser(myCanvas, grid);
+
+            CheckInputs.IsEnabled = false;
+            SolveButton.IsEnabled = false;
+            NextSudoku.IsEnabled = true;
         }
 
         private void CheckInputs_Click(object sender, RoutedEventArgs e)
@@ -93,7 +98,7 @@ namespace SudokuSolver.Pages
                         if (points > 0)
                         {
                             points--;
-                            PointsText.Text = $"Points: {points}";
+                            PointsText.Content = $"Points: {points}";
                         }
                     }
                     else if(tempGrid[i] != 0)
@@ -112,8 +117,9 @@ namespace SudokuSolver.Pages
                 {
                     level++;
                 }
-                PointsText.Text = $"Points: {points}";
+                PointsText.Content = $"Points: {points}";
                 NextSudoku.IsEnabled = true;
+                NextSudoku.Focus();
                 CheckInputs.IsEnabled = false;
             }
 

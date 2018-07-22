@@ -22,8 +22,10 @@ namespace SudokuSolver.Pages
         {
             if(!SolveGrid())
             {
-                ErrorText.Text = "This sudoku can't be solved";
+                ErrorText.Content = "This sudoku can't be solved";
             }
+            SolveButton.IsEnabled = false;
+            NewEmptySudokuButton.IsEnabled = true;
         }
 
         private bool SolveGrid()
@@ -42,7 +44,6 @@ namespace SudokuSolver.Pages
                     {
                         return false;
                     }
-
                 }
             }
 
@@ -65,7 +66,9 @@ namespace SudokuSolver.Pages
 
         private void MakeEmptySudoku()
         {
-            ErrorText.Text = "";
+            NewEmptySudokuButton.IsEnabled = false;
+            SolveButton.IsEnabled = true;
+            ErrorText.Content = "";
             GridMaker.AddRandomDigitsToGrid(ref grid, 0);
             gridDrafter = new GridDrafter(grid);
             gridDrafter.CreateGridForSudoku(myCanvas);

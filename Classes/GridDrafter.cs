@@ -35,9 +35,9 @@ namespace SudokuSolver.Classes
                     line.Stroke = new SolidColorBrush(Colors.DarkGray);
                 }
                 line.StrokeThickness = 2;
-                line.X1 = line.X2 = 270 + 30 * i;
-                line.Y1 = 50;
-                line.Y2 = 320;
+                line.X1 = line.X2 = 265 + 30 * i;
+                line.Y1 = 40;
+                line.Y2 = 310;
                 canvas.Children.Add(line);
             }
 
@@ -53,9 +53,9 @@ namespace SudokuSolver.Classes
                     line.Stroke = new SolidColorBrush(Colors.DarkGray);
                 }
                 line.StrokeThickness = 2;
-                line.Y1 = line.Y2 = 50 + 30 * i;
-                line.X1 = 270;
-                line.X2 = 540;
+                line.Y1 = line.Y2 = 40 + 30 * i;
+                line.X1 = 265;
+                line.X2 = 535;
                 canvas.Children.Add(line);
             }
         }
@@ -64,14 +64,14 @@ namespace SudokuSolver.Classes
         {
             for (int j = 0; j < 9; j++)
             {
-                int top = 53 + 30 * j;
+                int top = 43 + 30 * j;
                 for (int i = 0; i < 9; i++)
                 {
                     if (grid[j * 9 + i] != 0)
                     {
                         TextBlock digit = new TextBlock
                         {
-                            Margin = new Thickness(280 + 30 * i, top, 0, 0),
+                            Margin = new Thickness(275 + 30 * i, top, 0, 0),
                             Width = 24,
                             Height = 24,
                             FontSize = 18,
@@ -85,7 +85,7 @@ namespace SudokuSolver.Classes
                     {
                         TextBox input = new TextBox
                         {
-                            Margin = new Thickness(273 + 30 * i, top, 0, 0),
+                            Margin = new Thickness(268 + 30 * i, top, 0, 0),
                             Width = 24,
                             Height = 24,
                             FontSize = 18,
