@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SudokuSolver.Pages
 {
@@ -30,6 +31,47 @@ namespace SudokuSolver.Pages
 
             gd.CreateGridForSudoku(myCanvas);
             gd.AddInputsForUser(myCanvas);
+        }
+
+        private void CheckInputs_Click(object sender, RoutedEventArgs e)
+        {
+            int[] solved = new int[81];
+            Array.Copy(grid, solved, 81);
+
+            Solver.TrySolveSudoku(solved);
+
+            myCanvas.Children.Clear();
+
+            TextBox [] tbs = gd.getInputs();
+
+            for(int i=0; i<81; i++)
+            {
+                if(tbs[i] != null && tbs[i].Text.ToString().Length != 0)
+                {
+                    grid[i] = Int32.Parse(tbs[i].Text.ToString());
+                }
+            }
+
+            gd.CreateGridForSudoku(myCanvas);
+            gd.AddInputsForUser(myCanvas);
+
+            TextBlock [] tbks = gd.getDigits();
+
+            for(int i=0; i<81; i++)
+            {
+                if(tbks[i] != null && tbs[i] != null)
+                {
+                    if (solved[i] != grid[i])
+                    {
+                        tbks[i].Foreground = new SolidColorBrush(Colors.Red);
+                    }
+                    else
+                    {
+                        tbks[i].Foreground = new SolidColorBrush(Colors.Green);
+                    }
+                }
+            }
+
         }
     }
 }

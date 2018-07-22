@@ -11,10 +11,14 @@ namespace SudokuSolver.Classes
     class GridDrafter
     {
         private int [] grid;
+        private TextBox[] inputs;
+        private TextBlock[] digits;
 
         public GridDrafter(int [] grid)
         {
             this.grid = grid;
+            inputs = new TextBox[81];
+            digits = new TextBlock[81];
         }
 
         public void CreateGridForSudoku(Canvas canvas)
@@ -74,6 +78,7 @@ namespace SudokuSolver.Classes
                             FontWeight = FontWeights.Bold,
                             Text = grid[j * 9 + i].ToString()
                         };
+                        digits[j * 9 + i] = digit;
                         canvas.Children.Add(digit);
                     }
                     else
@@ -89,10 +94,21 @@ namespace SudokuSolver.Classes
                             VerticalContentAlignment = VerticalAlignment.Top
                         };
                         input.PreviewTextInput += PreviewTextInputHandler;
+                        inputs[j * 9 + i] = input;
                         canvas.Children.Add(input);
                     }
                 }
             }
+        }
+
+        public TextBox[] getInputs()
+        {
+            return inputs;
+        }
+
+        public TextBlock[] getDigits()
+        {
+            return digits;
         }
 
         private void PreviewTextInputHandler(Object sender, TextCompositionEventArgs e)
@@ -106,6 +122,7 @@ namespace SudokuSolver.Classes
             {
                 e.Handled = !IsTextAllowed(e.Text);
             }
+
         }
 
         private static bool IsTextAllowed(string text)

@@ -12,6 +12,7 @@
 
         </Canvas>
         <Button Name="SolveButton" Content="Solve Sudoku" Width="100" Height="50" Margin="0, 300, 0, 0" Click="SolveButton_Click"/>
+        <Button Name="CheckInputs" Content="Check Inputs" Width="100" Height="50" Margin="250, 300, 0, 0" Click="CheckInputs_Click"/>
     </Grid>
 
 </Page>
