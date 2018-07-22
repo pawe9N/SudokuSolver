@@ -9,6 +9,7 @@
       Title="StartPage">
 
     <StackPanel>
+        <Label Style="{StaticResource TitleLabelStyle}"/>
         <Button Name="StartGame" Content="Start Game" Click="StartGame_Click"/>
         <Button Name="Solver" Content="Sudoku Solver" Click="Solver_Click"/>
     </StackPanel>
